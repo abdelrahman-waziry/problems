@@ -1,3 +1,4 @@
+# Find Pythagorean Triplets
 Hi, here's your problem today. This problem was recently asked by **Uber**:
 
 Given a list of numbers, find if there exists a Pythagorean triplet in that list. A Pythagorean triplet is 3 variables a, b, c where `a^2 + b^2 = c^2`
