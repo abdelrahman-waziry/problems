@@ -14,4 +14,4 @@ Here's the signature:
     print distance('biting', 'sitting')
     # 2
 
-**Solution** : [here](../solutions/edist-distance.php)
+**Solution** : [here](../solutions/edit-distance.php)
