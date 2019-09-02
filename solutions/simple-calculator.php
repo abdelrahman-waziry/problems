@@ -2,68 +2,44 @@
 
 function evaluate(string $input) : int
 {
-    // TODO: handle parentheses
-    $queue = parse($input);
-    return calculate($queue);
-}
-
-function calculate(array $queue) : int
-{
-    $stack = [];
-    while (count($queue)) {
-        $token = array_shift($queue);
-        if (is_numeric($token)) {
-            array_push($stack, $token);
-        } else {
-            $right_operand = intval(array_pop($stack));
-            $left_operand = intval(array_pop($stack));
-            $result = apply_operation($left_operand, $right_operand, $token);
-            array_push($stack, $result);
-        }
-    }
-    return $stack[0];
-}
-
-function parse(string $input) : array
-{
-    $output_queue = [];
+    $value_stack = [];
     $operator_stack = [];
-
-    // Parse input token
-    for ($i = 0; $i < strlen($input); $i++) {
-        $token = $input[$i];
+    // Step 1
+    for ($index = 0; $index < strlen($input); $index ++) {
+        $token = $input[$index];
         // Skip white spaces
         if ($token === ' ') {
             continue;
         }
-        // if is a number
+        // handle numbers
         if (is_numeric($token)) {
-            array_push($output_queue, $token);
+            array_push($value_stack, intval($token));
         }
-        // is is operator
-        if (is_operator($token)) {
-            $top_operator = (string)$operator_stack[0];
-            $top_precedence = precedence($top_operator);
-            $token_precedence = precedence($token);
-
-            if ($token_precedence >= $top_precedence) {
-                array_pop($operator_stack);
-                if ($top_operator) {
-                    array_push($output_queue, $top_operator);
-                }
+        // handle left parentheses
+        if ($token === '(') {
+            array_push($operator_stack, $token);
+        }
+        // handle right parentheses
+        if ($token === ')') {
+            while (count($operator_stack) && $operator_stack[ count($operator_stack) - 1] !== '(') {
+                do_operation($value_stack, $operator_stack);
             }
-
+            array_pop($operator_stack);
+        }
+        // handle operators
+        if (is_operator($token)) {
+            while (count($operator_stack) && precedence($operator_stack[ count($operator_stack) - 1 ]) >= precedence($token)) {
+                 do_operation($value_stack, $operator_stack);
+            }
             array_push($operator_stack, $token);
         }
     }
-
-    // Generate output queue
+    // Step 2
     while (count($operator_stack)) {
-        $operator = array_pop($operator_stack);
-        array_push($output_queue, $operator);
+         do_operation($value_stack, $operator_stack);
     }
-
-    return $output_queue;
+    // Step 3
+    return (int) array_pop($value_stack);
 }
 
 function precedence(string $operator) : int
@@ -77,15 +53,21 @@ function precedence(string $operator) : int
     if ($operator === '^') {
         return 3;
     }
-    if ($operator === '(' || $operator ===')') {
-        return 4;
-    }
     return 0;
 }
 
 function is_operator(string $token) : bool
 {
-    return in_array($token, ['+', '-', '*', '/', '(', ')']);
+    return in_array($token, ['+', '-', '*', '/', '^']);
+}
+
+function do_operation(array &$value_stack, array &$operator_stack) : void
+{
+    $operator = array_pop($operator_stack);
+    $right_operand = (int)array_pop($value_stack);
+    $left_operand = (int)array_pop($value_stack);
+    $value = apply_operation($left_operand, $right_operand, $operator);
+    array_push($value_stack, $value);
 }
 
 function apply_operation(int $left_operand, int $right_operand, string $operator) : int
@@ -99,10 +81,14 @@ function apply_operation(int $left_operand, int $right_operand, string $operator
             return $left_operand / $right_operand;
         case '*':
             return $left_operand * $right_operand;
+        case '^':
+            return pow($left_operand, $right_operand);
     }
 }
 
 var_dump(
-    // evaluate('- (3 + ( 2 - 1 ) )')
-    evaluate('- 3 + 2 - 1')
+    evaluate('- (3 + ( 2 - 1 ) )'),
+    evaluate('- 2 * 5 + 6 / 3'),
+    evaluate('- 3 + 2 - 1'),
+    evaluate('- 2 ^ 5 * 2')
 );
