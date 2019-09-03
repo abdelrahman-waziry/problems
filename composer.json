@@ -1,0 +1,21 @@
+{
+    "name": "dhemy/problems",
+    "description": "Daily interview problems",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "imdhemy",
+            "email": "imdhemy@gmail.com"
+        }
+    ],
+    "require": {
+        "symfony/console": "^4.3",
+        "laravel/helpers": "^1.1"
+    },
+    "autoload" : {
+        "psr-4" : {
+            "App\\" : "./"
+        }
+    }
+}
