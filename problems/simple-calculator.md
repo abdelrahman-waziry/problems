@@ -19,3 +19,5 @@ Here's the function signature:
     # -4
 
 **Solution** : [here](../solutions/simple-calculator.php)
+
+**Waziry's solution(js)**: (https://playcode.io/452274?tabs=script.js,preview,console)
