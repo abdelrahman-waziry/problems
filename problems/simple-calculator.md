@@ -18,6 +18,8 @@ Here's the function signature:
     print eval('- (3 + ( 2 - 1 ) )')
     # -4
 
+## Solutions
+
 
 | Language | Solution | Demo |
 |--|--|--|
