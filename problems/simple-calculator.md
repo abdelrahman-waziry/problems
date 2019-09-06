@@ -18,6 +18,8 @@ Here's the function signature:
     print eval('- (3 + ( 2 - 1 ) )')
     # -4
 
-**Solution** : [here](../solutions/simple-calculator.php)
 
-**Waziry's solution(js)**: (https://playcode.io/452274?tabs=script.js,preview,console)
+| Language | Solution | Demo |
+|--|--|--|
+|PHP| [simple-calculator.php](../solutions/simple-calculator.php) | N/A|
+|JavaScript| [simple-calculator.js](../js-solutions/simple-calculator.js) | [Demo](https://playcode.io/452274?tabs=script.js,preview,console)
