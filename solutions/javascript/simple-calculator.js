@@ -3,7 +3,7 @@ Array.prototype.top = function() {
 }
 var numbersQueue = []
 var operatorsStack = []
-var allowedOperators = ['/', '*', '+', '-']
+var allowedOperators = ['/', '*', '+', '-', '^']
 var tokens = prompt('Please enter an expression')
 for (let index = 0; index < tokens.length; index++) {
     var current = tokens[index]
@@ -44,10 +44,13 @@ while(operatorsStack.length > 0){
 console.log(numbersQueue.pop())
 
 function getPrecedence(operator){
+    if(operator === '^'){
+        return 3
+    }
     if(operator === '/' || operator === '*'){
         return 2
     }
-    else if(operator === '+' || operator === '-'){
+    if(operator === '+' || operator === '-'){
         return 1
     }
 }
@@ -67,13 +70,16 @@ function calculate(leftOp, rightOp, operator){
     if(operator === '+'){
         return leftOp + rightOp
     }
-    else if(operator === '-'){
+    if(operator === '-'){
         return leftOp - rightOp
     }
-    else if(operator === '/'){
+    if(operator === '/'){
         return leftOp / rightOp
     }
-    else if(operator === '*'){
+    if(operator === '*'){
         return leftOp * rightOp
+    }
+    if(operator === '^'){
+        return Math.pow(leftOp, rightOp)
     }
 }
