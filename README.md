@@ -9,3 +9,4 @@ Daily coding interview practice.
 |2| Edit Distance | [edit-distance.md](/problems/edit-distance.md "edit-distance.md") | [edit-distance.php](/solutions/edit-distance.php "edit-distance.md.php") |
 |3| Simple Calculator | [simple-calculator.md](/problems/simple-calculator.md "simple-calculator.md") | [simple-calculator.php](/solutions/simple-calculator.php "edit-distance.md.php") |
 |4| Find Cycles in a Graph | [find-cycles-in-a-graph.md](/problems/find-cycles-in-a-graph.md) | [find-cycles-in-a-graph.php](/solutions/find-cycles-in-a-graph.php)|
+|5| Sort the list in O(n) time  | [n-sort.md](/problems/n-sort.md) | -- |
