@@ -1,4 +1,4 @@
-# sort the list in O(n) time.
+# Sort the list in O(n) time.
 
 Hi, here's your problem today. This problem was recently asked by **Google**:
 
