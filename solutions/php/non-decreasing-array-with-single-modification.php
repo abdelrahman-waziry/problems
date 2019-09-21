@@ -1,22 +1,23 @@
 <?php
 
-function is_non_decreasing($input) : bool
+function is_non_decreasing($nums) : bool
 {
-    $size = count($input);
     $changes = 0;
-    $i = 1;
-    while ($changes <= 1 && $i < $size) {
-        if ($input[$i] > $input[$i+1]) {
+    $size = count($nums);
+    for ($i = 1; $i < $size && $changes <=1; $i++) {
+        if ($nums[$i - 1] > $nums[$i]) {
             $changes ++;
+            // case like this [ 4 | 6 | `5` ] => [ 4 | 5 | 5 ]
+            if ($i == 1 || $nums[$i - 2] <= $nums[$i]) {
+                $nums[$i-1] = $nums[$i];
+            } else { // case like this [ 4 | 6 | `3` ] => [ 4 | 6 | 6]
+                $nums[$i] = $nums[$i - 1];
+            }
         }
-        $i ++;
     }
     return $changes <= 1;
 }
 
-$input1 = [13, 4, 7];
-$input2 = [5,1,3,2,5];
-
 var_dump(
-    is_non_decreasing($input2)
+    is_non_decreasing([3,4,2,3])
 );
